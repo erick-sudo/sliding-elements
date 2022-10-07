@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<script type="text/javascript" src="jquery-3.6.0.min.js"></script>
+	<style type="text/css">
+		*{
+			margin: 0;
+		}
+		html{
+			background-color: black;
+		}
+		.outer{
+			position: relative;
+			height: 200px;
+			overflow-x: hidden;
+			overflow-y: hidden;
+			border: dotted 3px red;
+			
+			width: 200px;
+			margin: 0 auto;
+			margin-top: 50%;
+			transform: translateY(-50%);
+		}
+		.inner{
+			line-height: 200px;
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			transition:  1s;
+			
+			text-align: center;
+		}
+		@keyframes scroll-left {
+			0%{margin-left: 100%;}
+			100%{margin-left: -100%;}
+		}
+	</style>
+</head>
+<body>
+	<div class="outer">
+		<div class="inner">
+			<img src="basketball.svg" height="200">
+		</div>
+		<div class="inner">
+			<img src="football.svg" height="200">
+		</div>
+		<div class="inner">
+			<img src="basketball.svg" height="200">
+		</div>
+		<div class="inner">
+			<img src="football.svg" height="200">
+		</div>
+		<div class="inner">
+			<img src="basketball.svg" height="200">
+		</div>
+		<div class="inner">
+			<img src="football.svg" height="200">
+		</div>
+		<div class="inner">
+			<img src="basketball.svg" height="200">
+		</div>
+		<div class="inner">
+			<img src="football.svg" height="200">
+		</div>
+		<div class="inner">
+			<img src="basketball.svg" height="200">
+		</div>
+		<div class="inner">
+			<img src="football.svg" height="200">
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	let flag = true;
+	$(document).ready(function(){
+		let dir = 1;
+		let index = 0;
+
+		let margin = 0;
+
+		Array.from(document.querySelectorAll(".inner")).forEach((ball) => {
+			$(ball).css("margin-left",margin+"%");
+			margin+=100;
+		});
+		
+		let interval = setInterval(()=>{
+			if (dir==1) {
+				alterMargins(dir);
+				index+=1;
+			}
+			else{
+				alterMargins(dir);
+				index-=1;
+			}
+			if(index==9){
+				dir=0;
+			}else if(index==0){
+				dir=1;
+			}
+		},5000);
+	});
+
+	function alterMargins(dir){
+		let margin = 0;
+		if(dir==1){
+			Array.from(document.querySelectorAll(".inner")).forEach((ball) => {
+				ball.style.marginLeft = (Number(ball.style.marginLeft.substring(0, ball.style.marginLeft.length-1))-100)+"%"
+				
+			});
+		}
+		else{
+			Array.from(document.querySelectorAll(".inner")).forEach((ball) => {
+				ball.style.marginLeft = (Number(ball.style.marginLeft.substring(0, ball.style.marginLeft.length-1))+100)+"%"
+				
+			});
+		}
+	}
+</script>
+</html>
